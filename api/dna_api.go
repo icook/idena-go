@@ -53,6 +53,7 @@ type Balance struct {
 	Stake   decimal.Decimal `json:"stake"`
 	Balance decimal.Decimal `json:"balance"`
 	Nonce   uint32          `json:"nonce"`
+	Epoch   uint16          `json:"epoch"`
 }
 
 func (api *DnaApi) GetBalance(address common.Address) Balance {
@@ -67,6 +68,7 @@ func (api *DnaApi) GetBalance(address common.Address) Balance {
 		Stake:   blockchain.ConvertToFloat(state.State.GetStakeBalance(address)),
 		Balance: blockchain.ConvertToFloat(state.State.GetBalance(address)),
 		Nonce:   nonce,
+		Epoch:   state.State.GetEpoch(address),
 	}
 }
 
